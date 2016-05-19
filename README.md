@@ -35,6 +35,8 @@ Can you help to write unit tests for MediaEntity and NewsEntity?
 2. The way of fetching and  parsing JSON data is not very nice. For example, if one of the name/value is missing, it
 can cause the app to crash.
 
+3. The layout is only suitable for phones. Can you create an immersive tablet experience?
+
 Can you help to make it better?
 
 ## Notes
