@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/it-mobileapps/android_challenge.svg?branch=master)](https://travis-ci.org/it-mobileapps/android_challenge)
+
 This is a sample News Reader app that is supposed to display news list and the details.
 The first page displays news list, when one of the items is clicked, it is supposed to show the detail of the selected news.
 Unfortunately, the app is full of bugs and it crashes as soon as it is launched.
