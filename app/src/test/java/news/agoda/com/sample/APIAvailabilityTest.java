@@ -15,13 +15,16 @@ public class APIAvailabilityTest {
         URLConnection connection = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb").openConnection();
         InputStream response = connection.getInputStream();
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(response, Charset.defaultCharset()))) {
             for (String line; (line = reader.readLine()) != null; ) {
                 buffer.append(line);
             }
+        } finally {
+            response.close();
         }
 
         assert buffer.length() > 0;
     }
+
 }
