@@ -20,6 +20,11 @@ public class DataManager {
 
     private static DataManager mManager;
 
+    /**
+     * Return an {@link Observable} which emits list of {@link NewsEntity}.
+     *
+     * @return
+     */
     public Observable<List<NewsEntity>> getNews() {
         return Observable.fromCallable(new Callable<List<NewsEntity>>() {
             @Override public List<NewsEntity> call() throws Exception {
