@@ -1,9 +1,12 @@
 package news.agoda.com.sample.data;
 
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -20,9 +23,7 @@ public class DataManager {
     public Observable<List<NewsEntity>> getNews() {
         return Observable.fromCallable(new Callable<List<NewsEntity>>() {
             @Override public List<NewsEntity> call() throws Exception {
-                URL url = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                String data = IOUtils.readStream(con.getInputStream());
+                String data = IOUtils.readStream(getHttpInputStream());
                 Gson gson = new GsonBuilder().registerTypeAdapter(NewsEntity.class,
                     new NewsEntityDeserializer()).create();
                 return gson.fromJson(data, NewsDataWrapper.class).getNewsEntities();
@@ -30,11 +31,20 @@ public class DataManager {
         }).subscribeOn(Schedulers.io());
     }
 
+    @VisibleForTesting InputStream getHttpInputStream() throws IOException {
+        URL url = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        return con.getInputStream();
+    }
+
     public static DataManager getInstance() {
         if (mManager == null) {
             mManager = new DataManager();
         }
         return mManager;
+    }
+
+    private DataManager() {
     }
 
 }
