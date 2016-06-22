@@ -28,8 +28,7 @@ public class DetailFragment extends Fragment {
 
     private String mStoryURL = "";
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_detail, container, false);
         ButterKnife.bind(this, view);
@@ -37,6 +36,15 @@ public class DetailFragment extends Fragment {
         setContent(bundle.getString("title", ""), bundle.getString("summary", ""),
             bundle.getString("imgURL", ""), bundle.getString("storyURL", ""));
         return view;
+    }
+
+    @OnClick(R.id.full_story_link) public void onFullStoryClicked() {
+        if (mStoryURL == null || mStoryURL.isEmpty()) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(mStoryURL));
+        startActivity(intent);
     }
 
     public void setContent(String title, String summary, String imageURL, String storyURL) {
@@ -49,13 +57,6 @@ public class DetailFragment extends Fragment {
         mStoryURL = storyURL;
     }
 
-    @OnClick(R.id.full_story_link) public void onFullStoryClicked() {
-        if (mStoryURL == null || mStoryURL.isEmpty()) {
-            return;
-        }
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(mStoryURL));
-        startActivity(intent);
-    }
+
 
 }

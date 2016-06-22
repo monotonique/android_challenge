@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity implements OnNewsItemSelecte
 
     @Nullable @BindView(R.id.fragment_container) FrameLayout mFragmentContainer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

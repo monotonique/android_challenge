@@ -16,8 +16,7 @@ import java.util.List;
  */
 public class NewsEntityDeserializer implements JsonDeserializer<NewsEntity> {
 
-    @Override
-    public NewsEntity deserialize(JsonElement json, Type typeOfT,
+    @Override public NewsEntity deserialize(JsonElement json, Type typeOfT,
         JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         JsonElement jsonElement = jsonObject.get("multimedia");

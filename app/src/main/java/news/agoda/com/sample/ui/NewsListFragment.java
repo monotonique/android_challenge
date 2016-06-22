@@ -38,7 +38,7 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import timber.log.Timber;
 
-public class NewsListFragment extends Fragment implements RecyclerViewOnItemClickListener{
+public class NewsListFragment extends Fragment implements RecyclerViewOnItemClickListener {
 
     @BindView(android.R.id.list) RecyclerView mListView;
     @BindView(R.id.progress) ProgressBar progressBar;
@@ -46,8 +46,7 @@ public class NewsListFragment extends Fragment implements RecyclerViewOnItemClic
     private OnNewsItemSelectedListener mCallback;
     private NewsAdapter mAdapter;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_news_list, container, false);
         ButterKnife.bind(this, view);
@@ -122,8 +121,7 @@ public class NewsListFragment extends Fragment implements RecyclerViewOnItemClic
             return new NewsViewHolder(mInflater.inflate(R.layout.list_item_news, parent, false));
         }
 
-        @Override
-        public void onBindClickableViewHolder(NewsViewHolder holder, int position) {
+        @Override public void onBindClickableViewHolder(NewsViewHolder holder, int position) {
             NewsEntity newsEntity = getItem(position);
             List<MediaEntity> mediaEntityList = newsEntity.getMediaEntity();
             String thumbnailURL = "";
@@ -193,8 +191,7 @@ public class NewsListFragment extends Fragment implements RecyclerViewOnItemClic
                 R.drawable.line_divider, null);
         }
 
-        @Override
-        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        @Override public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
             int left = parent.getPaddingLeft();
             int right = parent.getWidth() - parent.getPaddingRight();
 
