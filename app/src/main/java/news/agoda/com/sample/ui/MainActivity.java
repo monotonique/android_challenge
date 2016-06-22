@@ -1,9 +1,12 @@
 package news.agoda.com.sample.ui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import butterknife.BindView;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements OnNewsItemSelecte
         ButterKnife.bind(this);
 
         if (mFragmentContainer != null && savedInstanceState == null) {
+            // one-panel layout
             NewsListFragment mNewsNewsListFragment = new NewsListFragment();
             getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewsNewsListFragment).commit();
@@ -50,10 +54,47 @@ public class MainActivity extends AppCompatActivity implements OnNewsItemSelecte
             args.putString("imgURL", imgURL);
             args.putString("storyURL", storyURL);
             newFragment.setArguments(args);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.fragment_container, newFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
+            getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.translate_in, R.anim.translate_out,
+                    R.anim.translate_in, R.anim.translate_out)
+                .add(R.id.fragment_container, newFragment)
+                .addToBackStack(null)
+                .commit();
+            showBackArrow();
+        }
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            hideBackArrow();
+            getSupportFragmentManager().popBackStack();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Build.VERSION.SDK_INT > 5
+            && keyCode == KeyEvent.KEYCODE_BACK
+            && event.getRepeatCount() == 0) {
+            hideBackArrow();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void showBackArrow() {
+        ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
+    private void hideBackArrow() {
+        ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
     }
 

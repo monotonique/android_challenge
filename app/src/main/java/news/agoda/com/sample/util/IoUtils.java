@@ -8,6 +8,12 @@ import java.io.InputStreamReader;
 
 public class IOUtils {
 
+    /**
+     * Read from input stream.
+     *
+     * @param in
+     * @return
+     */
     public static String readStream(InputStream in) {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in));) {
@@ -23,6 +29,11 @@ public class IOUtils {
         return sb.toString();
     }
 
+    /**
+     * Close the input stream without throwing exception.
+     *
+     * @param input
+     */
     public static void closeQuietly(InputStream input) {
         try {
             if (input != null) {

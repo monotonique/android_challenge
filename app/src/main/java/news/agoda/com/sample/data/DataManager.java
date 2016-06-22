@@ -20,6 +20,11 @@ public class DataManager {
 
     private static DataManager mManager;
 
+    /**
+     * Return an {@link Observable} which emits list of {@link NewsEntity}.
+     *
+     * @return
+     */
     public Observable<List<NewsEntity>> getNews() {
         return Observable.fromCallable(new Callable<List<NewsEntity>>() {
             @Override public List<NewsEntity> call() throws Exception {
@@ -31,17 +36,22 @@ public class DataManager {
         }).subscribeOn(Schedulers.io());
     }
 
-    @VisibleForTesting InputStream getHttpInputStream() throws IOException {
-        URL url = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        return con.getInputStream();
-    }
-
+    /**
+     * Use this to get instance of {@link DataManager}.
+     *
+     * @return
+     */
     public static DataManager getInstance() {
         if (mManager == null) {
             mManager = new DataManager();
         }
         return mManager;
+    }
+
+    @VisibleForTesting InputStream getHttpInputStream() throws IOException {
+        URL url = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        return con.getInputStream();
     }
 
     private DataManager() {

@@ -33,8 +33,10 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.view_detail, container, false);
         ButterKnife.bind(this, view);
         Bundle bundle = getArguments();
-        setContent(bundle.getString("title", ""), bundle.getString("summary", ""),
-            bundle.getString("imgURL", ""), bundle.getString("storyURL", ""));
+        if (bundle != null) {
+            setContent(bundle.getString("title", ""), bundle.getString("summary", ""),
+                bundle.getString("imgURL", ""), bundle.getString("storyURL", ""));
+        }
         return view;
     }
 
@@ -56,7 +58,5 @@ public class DetailFragment extends Fragment {
         mImageView.setController(draweeController);
         mStoryURL = storyURL;
     }
-
-
 
 }
