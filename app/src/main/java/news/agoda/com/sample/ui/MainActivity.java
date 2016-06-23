@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements OnNewsItemSelecte
             getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewsNewsListFragment).commit();
         }
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            // show back arrow button for going back to list
+            showBackArrow();
+        }
     }
 
     @Override public void onNewsItemSelected(NewsEntity newsEntity) {
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnNewsItemSelecte
         return super.onOptionsItemSelected(item);
     }
 
-    @Override public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Build.VERSION.SDK_INT > 5
             && keyCode == KeyEvent.KEYCODE_BACK
             && event.getRepeatCount() == 0) {
